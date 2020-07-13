@@ -1,0 +1,1 @@
+The ‘requirements.txt’ file should be generated using ‘pip freeze > requirements.txt’.  This file will show all of the dependencies (including specific versions) of the python packages that your project is using.
