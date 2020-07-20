@@ -10,13 +10,10 @@ class Controller:
         self.model = Model()
         self.view = View(self)
 
-    def main(self):
-        self.view.main()
-
-    def on_button_click(self, caption):
-        result = self.model.calculate(caption)
-        self.view.value_var.set(result)
+    # def main(self):
+        # self.view.main()
 
 if __name__ == '__main__':
-    calculator = Controller()
-    calculator.main()
+    controller = Controller()
+    # controller.main()
+    
