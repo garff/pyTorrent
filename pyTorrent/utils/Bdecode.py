@@ -28,7 +28,7 @@ THE_END = b'e'
 # Skip the last Byte
 LAST_BYTE = 1
 
-class BDecode:
+class Bdecode:
     """
     Decodes a torrent file and returns the meta data to the calling 
     source as an OrderedDirect.

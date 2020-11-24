@@ -1,20 +1,21 @@
 import PyQt5.QtWidgets as PyQt5
 
-from pyTorrent.pyTorrent.view.StartBtn import StartBtn
-from pyTorrent.pyTorrent.view.PauseBtn import PauseBtn
-from pyTorrent.pyTorrent.view.StopBtn import StopBtn
-from pyTorrent.pyTorrent.view.DeleteBtn import DeleteBtn
-from pyTorrent.pyTorrent.view.TorrentList import TorrentList
-from pyTorrent.pyTorrent.view.DownloadSpeed import DownloadSpeed
-from pyTorrent.pyTorrent.view.Spacer import Spacer
-from pyTorrent.pyTorrent.view.UploadSpeed import UploadSpeed
+from .startBtn import StartBtn
+from .pauseBtn import PauseBtn
+from .stopBtn import StopBtn
+from .deleteBtn import DeleteBtn
+from .torrentList import TorrentList
+from .downloadSpeed import DownloadSpeed
+from .spacer import Spacer
+from .uploadSpeed import UploadSpeed
+from .addBtn import AddBtn 
 
 class View():
 
-    def __init__(self, controller):
-        super(View, self).__init__()
-        self.controller = controller
+    def __init__(self):
+        self.controller = None
 
+    def initUI(self):
         app = PyQt5.QApplication([])
 
         ## Setting up main window
@@ -25,20 +26,21 @@ class View():
         ## Adding UI widgets 
         self.layout = PyQt5.QGridLayout()
 
-        # Buttons 
-        self.layout.addWidget(StartBtn(), 0, 0)
-        self.layout.addWidget(PauseBtn(), 0, 1)
-        self.layout.addWidget(StopBtn(), 0, 2)
-        self.layout.addWidget(DeleteBtn(), 0, 10)
-
         # Item list holding the torrents
         self.torrentList = TorrentList() 
         self.layout.addWidget(self.torrentList, 1, 0, 1, 11)
 
-        # Adding test torrents 
-        for x in range(10):
-            item = PyQt5.QListWidgetItem("Test item " + str(x))
-            self.torrentList.addItem(item)
+        # Buttons
+        self.deleteBtn = DeleteBtn()
+
+        self.layout.addWidget(StartBtn(), 0, 0)
+        self.layout.addWidget(PauseBtn(), 0, 1)
+        self.layout.addWidget(StopBtn(), 0, 2)
+        self.layout.addWidget(AddBtn(self.controller), 0, 3)
+        self.layout.addWidget(self.deleteBtn, 0, 10)
+
+        self.deleteBtn.clicked.connect(
+            lambda: self.deleteBtn.deleteTorrents(self.torrentList))
 
         # Adding download / uploads speeds 
         self.layout.addWidget(DownloadSpeed(), 2, 8)
@@ -49,3 +51,6 @@ class View():
         mainWindow.show()
 
         app.exec_()
+
+    def register(self, controller):
+        self.controller = controller

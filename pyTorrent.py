@@ -1,5 +1,8 @@
 import sys, os
-sys.path.insert(0, os.path.abspath('..'))
+
+from pyTorrent.controller.controller import Controller
+from pyTorrent.model.model import Model
+from pyTorrent.view.view import View
 
 '''
     Created July 13, 2020
@@ -7,3 +10,11 @@ sys.path.insert(0, os.path.abspath('..'))
     @version: 1.0.0
 '''
 
+class PyTorrent:
+    def __init__(self):
+        self.view = View()
+        self.model = Model()
+        self.controller = Controller(self.model, self.view)
+
+if __name__ == '__main__':
+    pyTorrent = PyTorrent()

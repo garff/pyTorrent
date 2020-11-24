@@ -1,19 +1,27 @@
-# Temp Path hack.
-import sys, os
-sys.path.insert(0, os.path.abspath('..'))
-
-from pyTorrent.pyTorrent.model.model import Model
-from pyTorrent.pyTorrent.view.view import View
+from ..model.model import Model
+from ..view.view import View
 
 class Controller:
-    def __init__(self):
-        self.model = Model()
-        self.view = View(self)
+    def __init__(self, model, view):
+        self.model = model
+        self.view = view
+        self.view.register(self)
+        self.view.initUI()
 
-    # def main(self):
-        # self.view.main()
+    def addTorrent(self, filename: str):
+        """
+        Adds a torrent to the database. 
 
-if __name__ == '__main__':
-    controller = Controller()
-    # controller.main()
-    
+        :return void 
+        """
+        newTorrentList = self.model.addTorrent(filename)
+        self._updateTorrentListView(newTorrentList)
+
+    def _updateTorrentListView(self, newTorrentList: list):
+        """
+        Updates the view regarding the currently added torrents.
+        
+        :return void 
+        """
+        print(self.__dict__)
+        self.view.torrentList.updateTorrentList(newTorrentList)

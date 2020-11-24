@@ -12,7 +12,7 @@
 #
 # Copyright 2020 - madsgarff@hotmail.com
 
-from BDecode import BDecode  
+from .Bdecode import Bdecode  
 from collections import OrderedDict
 
 # Indicates beginning
@@ -26,7 +26,7 @@ STRING_SEP = ':'
 # End of int, list or dict
 THE_END = 'e'
 
-class BEncode:
+class Bencode:
     """
     Encodes a python object and returns it as a bencoded file torrent
     file.
