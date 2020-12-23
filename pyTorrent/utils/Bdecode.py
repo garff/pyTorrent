@@ -40,7 +40,7 @@ class Bdecode:
         with open(byteData, 'rb') as f:
             self._data = f.read()
 
-    def _decode(self):
+    def decode(self):
         """ 
         Decodes a byte data file and returns it.
 
@@ -141,7 +141,7 @@ class Bdecode:
             d[key] = value
         return d # returns the final dict 
 
-if __name__ == "__main__":
-    decoder = BDecode("test.torrent")
-    decodedFile = decoder._decode()
-    print(decodedFile)
+# if __name__ == "__main__":
+#     decoder = Bdecode("test.torrent")
+#     decodedFile = decoder._decode()
+#     print(decodedFile)
